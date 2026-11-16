@@ -1,0 +1,47 @@
+name: Build and publish the app to GitHub Pages
+
+# Runs when this repo changes, and on demand (Actions tab → this workflow → Run workflow)
+# to pick up new content from HelenaIv/karnak-field-guide.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: karnak-app
+      - uses: actions/checkout@v4
+        with:
+          repository: HelenaIv/karnak-field-guide
+          path: karnak-field-guide
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - run: python karnak-app/scripts/build.py --content karnak-field-guide
+      - run: touch karnak-app/www/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: karnak-app/www
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

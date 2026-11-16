@@ -12,7 +12,7 @@ Needs internet only for: first install, updates, and outside links (source websi
 
 ## Install for friends (no App Store, no Google Play)
 
-The app must be on an HTTPS address (see Hosting). Send the link.
+Send the GitHub Pages link (see Hosting).
 
 - **iPhone/iPad**: open the link in Safari → Share → **Add to Home Screen**. Open it once from the home screen with internet and wait for `✓ Offline`.
 - **Android**: open the link in Chrome → menu ⋮ → **Install app** (or Add to Home screen). Open once with internet, wait for `✓ Offline`.
@@ -31,9 +31,17 @@ python scripts/build.py --skip-content  # reuse the content repo's current dist/
 
 Layout: `app/` = files added on top of the content build (manifest, `sw.js` template, `offline.js`, icons); `www/` = output (git-ignored), upload this folder.
 
-## Hosting
+## Hosting: GitHub Pages
 
-Not decided yet. Any static HTTPS host works: GitHub Pages from this repo, Netlify (drag the `www/` folder), Cloudflare Pages. The address is public but unlisted.
+`.github/workflows/pages.yml` builds the app on GitHub (it fetches the public `HelenaIv/karnak-field-guide`, builds it, then this app) and publishes `www/`. Expected address: `https://helenaiv.github.io/karnak-app/`.
+
+One-time setup:
+
+1. GitHub Desktop → File → Add local repository → `karnak-app` → **Publish repository**. Untick "Keep this code private" (Pages on a free GitHub plan needs a public repo; the content repo is public already).
+2. On github.com: repo **Settings → Pages → Source: GitHub Actions**.
+3. **Actions** tab → "Build and publish the app to GitHub Pages" → **Run workflow** (or push any commit).
+
+New content: push the content repo as usual, then **Run workflow** here. Phones pick up the new version next time they open the app with internet.
 
 ## Tested (2026-11-16)
 
