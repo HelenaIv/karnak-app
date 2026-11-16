@@ -18,7 +18,7 @@ Send the GitHub Pages link (see Hosting).
 - **Android**: open the link in Chrome → menu ⋮ → **Install app** (or Add to Home screen). Open once with internet, wait for `✓ Offline`.
 - **Desktop Chrome/Edge**: install icon in the address bar.
 
-Updates: rebuild and re-upload; each phone downloads the new version in the background next time it opens with internet, keeping the old copy until the new one is complete.
+Updates: run the Pages workflow (see Hosting); each phone downloads the new version in the background next time it opens with internet, keeping the old copy until the new one is complete.
 
 ## Build
 
