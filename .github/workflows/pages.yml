@@ -4,7 +4,7 @@ name: Build and publish the app to GitHub Pages
 # to pick up new content from HelenaIv/karnak-field-guide.
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
