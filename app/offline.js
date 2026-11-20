@@ -1,8 +1,10 @@
 // Registers the offline service worker and shows the guide's offline status in the header.
 (function () {
   if (!('serviceWorker' in navigator)) return;
-  const uk = (window.KARNAK_LANG === 'uk');
-  const T = uk
+  const L = window.KARNAK_LANG;
+  const T = L === 'nb'
+    ? { saving: p => `↓ ${p}%`, ready: '✓ Offline', fail: '! Offline', savingL: 'Lagrer guiden for bruk uten nett', readyL: 'Hele guiden er lagret på denne enheten og virker uten internett', failL: 'Offline-kopien er ikke ferdig – åpne guiden igjen med internett' }
+    : L === 'uk'
     ? { saving: p => `↓ ${p}%`, ready: '✓ Офлайн', fail: '! Офлайн', savingL: 'Завантаження для офлайн-доступу', readyL: 'Увесь путівник збережено на пристрої й доступний без інтернету', failL: 'Офлайн-копія не завершена — відкрийте путівник з інтернетом' }
     : { saving: p => `↓ ${p}%`, ready: '✓ Offline', fail: '! Offline', savingL: 'Saving the guide for offline use', readyL: 'The whole guide is saved on this device and works without internet', failL: 'Offline copy not finished — open the guide again with internet' };
 
